@@ -27,7 +27,7 @@ class DataTransformation:
             categorical_features = ['gender', 'race_ethnicity', 'parental_level_of_education', 'lunch', 'test_preparation_course']
 
             numerical_pipeline = Pipeline(steps = [("Imputer", SimpleImputer(strategy = "median")),
-                                                   ("Scaler", StandardScaler(with_mean = False))])
+                                                   ("Scaler", StandardScaler())])
             logging.info(f"Numerical features: {numerical_features}")
 
             categorical_pipeline = Pipeline(steps = [("Imputer", SimpleImputer(strategy = "most_frequent")),
