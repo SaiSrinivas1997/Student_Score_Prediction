@@ -31,7 +31,7 @@ class DataTransformation:
             logging.info(f"Numerical features: {numerical_features}")
 
             categorical_pipeline = Pipeline(steps = [("Imputer", SimpleImputer(strategy = "most_frequent")),
-                                                     ("one_hot_encoder", OneHotEncoder()),
+                                                     ("one_hot_encoder", OneHotEncoder(handle_unknown = 'ignore')),
                                                      ("scaler", StandardScaler(with_mean = False))])
             logging.info(f"Categorical features: {categorical_features}")
 
