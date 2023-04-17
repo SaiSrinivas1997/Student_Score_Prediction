@@ -26,13 +26,11 @@ class DataTransformation:
             numerical_features = [ 'reading_score', 'writing_score']
             categorical_features = ['gender', 'race_ethnicity', 'parental_level_of_education', 'lunch', 'test_preparation_course']
 
-            numerical_pipeline = Pipeline(steps = [("Imputer", SimpleImputer(strategy = "median")),
-                                                   ("Scaler", StandardScaler())])
+            numerical_pipeline = Pipeline(steps = [("Imputer", SimpleImputer(strategy = "median"))])
             logging.info(f"Numerical features: {numerical_features}")
 
             categorical_pipeline = Pipeline(steps = [("Imputer", SimpleImputer(strategy = "most_frequent")),
-                                                     ("one_hot_encoder", OneHotEncoder(handle_unknown = 'ignore')),
-                                                     ("scaler", StandardScaler(with_mean = False))])
+                                                     ("one_hot_encoder", OneHotEncoder(handle_unknown = 'ignore'))])
             logging.info(f"Categorical features: {categorical_features}")
 
             logging.info("Data Transformation Started")
