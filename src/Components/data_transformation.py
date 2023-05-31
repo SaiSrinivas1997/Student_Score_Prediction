@@ -27,16 +27,16 @@ class DataTransformation:
             categorical_features = ['gender', 'race_ethnicity', 'parental_level_of_education', 'lunch', 'test_preparation_course']
 
             numerical_pipeline = Pipeline(steps = [("Imputer", SimpleImputer(strategy = "median"))])
-            logging.info(f"Numerical features: {numerical_features}")
+            #logging.info(f"Numerical features: {numerical_features}")
 
             categorical_pipeline = Pipeline(steps = [("Imputer", SimpleImputer(strategy = "most_frequent")),
                                                      ("one_hot_encoder", OneHotEncoder(handle_unknown = 'ignore'))])
-            logging.info(f"Categorical features: {categorical_features}")
+            #logging.info(f"Categorical features: {categorical_features}")
 
-            logging.info("Data Transformation Started")
+            #logging.info("Data Transformation Started")
             preprocessor = ColumnTransformer([("numerical_pipeline", numerical_pipeline, numerical_features),
                                               ("categorical_pipeline", categorical_pipeline, categorical_features)])
-            logging.info("Data Transformation completed")
+            #logging.info("Data Transformation completed")
             
             return preprocessor
         except Exception as e:
@@ -46,9 +46,9 @@ class DataTransformation:
         try:
             train_df = pd.read_csv(train_path)
             test_df = pd.read_csv(test_path)
-            logging.info("Read train and test data completed")
+            #logging.info("Read train and test data completed")
 
-            logging.info("Obtaining preprocessor object")
+            #logging.info("Obtaining preprocessor object")
             preprocessing_obj = self.get_data_transformer_obj()
 
             target_column_name = "math_score"
@@ -59,7 +59,7 @@ class DataTransformation:
             input_feature_test_df = test_df.drop(columns = [target_column_name], axis = 1)
             target_feature_test_df = test_df[target_column_name]
 
-            logging.info("Applying preprocessing on training and testing data frame")
+            #logging.info("Applying preprocessing on training and testing data frame")
             input_feature_train_arr = preprocessing_obj.fit_transform(input_feature_train_df)
             input_feature_test_arr = preprocessing_obj.transform(input_feature_test_df)
 
@@ -69,7 +69,7 @@ class DataTransformation:
             save_object(file_path = self.DataTransformation_config.pre_processor_obj_filepath,
                         obj = preprocessing_obj)
             
-            logging.info(f"Saved Preprocessing Object")
+            #logging.info(f"Saved Preprocessing Object")
 
             return (train_arr, test_arr, self.DataTransformation_config.pre_processor_obj_filepath)
         except Exception as e:

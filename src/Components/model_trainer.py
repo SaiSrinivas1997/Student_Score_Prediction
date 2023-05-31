@@ -27,7 +27,7 @@ class ModelTrainer:
 
     def initiate_model_trainer(self, train_arr, test_arr):
         try:
-            logging.info("Split trian and test input data")
+            #logging.info("Split trian and test input data")
             x_train, y_train, x_test, y_test = (train_arr[:,:-1],
                                                 train_arr[:,-1],
                                                 test_arr[:,:-1],
@@ -99,7 +99,7 @@ class ModelTrainer:
             if best_model_score<0.6:
                 raise CustomException("No best model found")
             
-            logging.info("Best found model on training and testing dataset")
+            #logging.info("Best found model on training and testing dataset")
             save_object(file_path = self.model_trainer_config.trained_model_file_path,
                         obj = best_model)
             
